@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSX-function</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    //JSX 用于将模板转为HTML语言，并插入指定的DOM节点
+    /*
+    var flag = false;
+    //样式通过变量方式来设置，用驼峰命名方式
+    var div1 = {
+        fontSize: '20px',
+        color: '#f60'
+    };
+    ReactDOM.render(
+            <ul className="lists-ul">
+                <li style={div1}>{flag===true?'111':'123'}</li>
+                <li>2222</li>
+                <li>3333</li>
+            </ul>,
+        document.getElementById('example')
+    );
+    */
+    /*
+    //使用数组存储模板
+    var arr = [
+        <div key="1">111</div>,
+        <div key="2">222</div>,
+        <div key="3">333</div>
+    ];
+    ReactDOM.render(
+        <div>{arr}</div>,
+        document.getElementById('example')
+    );
+    */
+    //定义函数
+    function action(item) {
+//        return item;
+        return item.name + "" + item.age;
+    }
+//    var user = 'world123';
+    const user = {
+        name: 'lili',
+        age: 22
+    };
+    var element = <h1>hello,{action(user)}</h1>;
+    ReactDOM.render(
+        element,
+        document.getElementById('example')
+    );
+</script>
+</body>
+</html>

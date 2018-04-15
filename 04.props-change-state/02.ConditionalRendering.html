@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conditional Rendering</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    function List1() {
+        return <h1>list1</h1>
+    }
+    function List2() {
+        return <h1>list2</h1>
+    }
+    class Hello extends React.Component {
+        constructor() {
+            super();
+            this.state = {
+                flag: false
+            };
+        }
+        render() {
+            if(this.state.flag) {
+                return <List1/>
+            } else {
+                return <List2/>
+            }
+        }
+    }
+
+    ReactDOM.render(
+        <Hello />,
+        document.getElementById('example')
+    )
+</script>
+</body>
+</html>

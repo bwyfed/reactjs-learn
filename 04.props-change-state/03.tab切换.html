@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tab切换</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <style>
+        .listBack {
+           color: #f60;
+        }
+    </style>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    function OneList() {
+        return <p>列表1111</p>
+    }
+    function TwoList() {
+        return <p>列表2222</p>
+    }
+    function ListInfo(props) {
+        //使用三目运算
+        return (props.type ? <OneList/>: <TwoList/>)
+    }
+    class TabList extends React.Component {
+        constructor() {
+            super();
+            this.state = {
+                isShowOne: true
+            };
+        }
+        /*
+        listOneClick() {
+            this.setState({isShowOne:true});
+        }
+        listTwoClick() {
+            this.setState({isShowOne:false});
+        }
+        */
+        listClick(type) {
+            if(type===1) {
+                this.setState({isShowOne:true})
+            } else {
+                this.setState({isShowOne:false})
+            }
+        }
+
+        render() {
+            return (
+                <div>
+                    <button className={this.state.isShowOne?'listBack':''} onClick={()=>this.listClick(1)}>列表1</button>
+                    <button className={this.state.isShowOne?'':'listBack'} onClick={()=>this.listClick(2)}>列表2</button>
+                    <div>
+                        <ListInfo type={this.state.isShowOne}/>
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <TabList />,
+        document.getElementById('example')
+    )
+</script>
+</body>
+</html>

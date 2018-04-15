@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component-nest</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    //组件的嵌套
+    const data = {
+        address: 'wuhan',
+        obj: {
+            name: 'sonia'
+        }
+    };
+    function Welcome(props) {
+        return <h1>hello,{props.name}</h1>;
+    }
+    function App() {
+        return (
+            <div>
+                <Welcome name={data.address}/>
+                <Welcome name='list2'/>
+                <Welcome name="list3"/>
+            </div>
+        );
+    }
+    ReactDOM.render(
+        <App />,
+        document.getElementById('example')
+    )
+</script>
+</body>
+</html>

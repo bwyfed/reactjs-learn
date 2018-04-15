@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React开篇</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        //JSX 用于将模板转为HTML语言，并插入指定的DOM节点
+        /*
+        ReactDOM.render(
+            <h1>Hello, world!</h1>,
+            document.getElementById('example')
+        )
+        */
+        //不用JSX语法，用以下方法生成DOM元素
+        /*
+        var child1 = React.createElement('li',null,'1111');
+        var child2 = React.createElement('li',null,'2222');
+        var child3 = React.createElement('li',null,'3333');
+        var str = React.createElement('ul',{className: 'lists-ul'},child1,child2,child3);
+        //渲染DOM
+        ReactDOM.render(
+            str,
+            document.getElementById('example')
+        )
+        */
+        //使用JSX语法，可以这样写
+        /*
+        ReactDOM.render(
+            <ul className="lists-ul">
+                <li>1111</li>
+                <li>2222</li>
+                <li>3333</li>
+            </ul>,
+            document.getElementById('example')
+        );
+        */
+        /*
+        //增加样式变量，使用大括号
+        var flag = false;
+        var div1 = {
+            fontSize: '20px',
+            color: '#f60'
+        };
+        ReactDOM.render(
+                <ul className="lists-ul">
+                    <li style={div1}>{flag===true?'111':'123'}</li>
+                    <li>2222</li>
+                    <li>3333</li>
+                </ul>,
+            document.getElementById('example')
+        );
+        */
+    </script>
+</body>
+</html>

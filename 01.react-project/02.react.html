@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React开篇</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        //JSX 用于将模板转为HTML语言，并插入指定的DOM节点
+        //数组的遍历
+        var arr = ['aaa1','bbb1','ccc1'];
+        /*
+        //方法1
+        ReactDOM.render(
+            <div>
+                {
+                    arr.map(function(item,index){
+                        return <div key={index}>hello, {item}</div>
+                    })
+                }
+            </div>,
+            document.getElementById('example')
+        );
+        */
+        /*
+        //方法2
+        var names = [];
+        for(var i=0; i <arr.length; i++){
+            names.push(<div key={i}>hello, {arr[i]}</div>);
+        }
+        ReactDOM.render(
+            <div>
+                {names}
+            </div>,
+            document.getElementById('example')
+        )
+        */
+        //方法2的拆解
+        var names = [
+            <div key="1">111</div>,
+            <div key="2">222</div>,
+            <div key="3">333</div>
+        ];
+        ReactDOM.render(
+            <div>
+                {names}
+            </div>,
+            document.getElementById('example')
+        );
+    </script>
+</body>
+</html>

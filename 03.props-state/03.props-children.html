@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>props-children</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    class HelloMessage extends React.Component{
+        //内部定义默认属性
+        render() {
+            console.log(this.props.children);
+            return (
+                <ul>
+                    {
+                        React.Children.map(this.props.children,function(item,index){
+                            return <li key={index}>hello, {item}</li>
+                        })
+                    }
+                </ul>
+            )
+        }
+    }
+    const data = {
+        address:'wuhan',
+        obj: {
+            name: 'sonia'
+        }
+    };
+    ReactDOM.render(
+        <HelloMessage>
+            <span>a</span>
+            <span>b</span>
+            <span>c</span>
+        </HelloMessage>,
+        document.getElementById('example')
+    )
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form控件封装</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        class MyForm extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    name: 'lili',
+                    password: '',
+                    address:''
+                };
+            }
+            handleClick(e) {
+                //表单控件的name属性和state的名字一致
+                let target = e.target;
+                let name = target.name; //name是个变量，作为对象的key，要使用[]
+                this.setState({
+                    [name]: e.target.value
+                })
+            }
+            handleSubmit(e) {
+                //假设data里面的数据要传给服务端
+                alert(JSON.stringify(this.state));
+                e.preventDefault();
+            }
+            render() {
+                return (
+                    <div>
+                        <div>
+                            <label>姓名：</label>
+                            <input type="text" name="name" value={this.state.name}
+                                   onChange={(event)=>this.handleClick(event)}/>
+                        </div>
+                        <div>
+                            <label>密码：</label>
+                            <input type="password" name="password" value={this.state.password}
+                                   onChange={(event)=>this.handleClick(event)}/>
+                        </div>
+                        <div>
+                            <label>地址：</label>
+                            <input type="text" name="address" value={this.state.address}
+                                   onChange={(event)=>this.handleClick(event)}/>
+                        </div>
+                        <input type="button" value="submit" onClick={()=>this.handleSubmit()}/>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <MyForm />,
+            document.getElementById('example')
+        );
+    </script>
+
+</body>
+</html>

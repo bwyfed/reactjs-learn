@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form表单-双向数据绑定</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        class TabList extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    value: 'hello',
+                    male: true
+                };
+            }
+            handleChange(e) {
+                this.setState({
+                    value: e.target.value
+                })
+            }
+            handleRadio(e) {
+                let male = e.target.value === 'man';
+                this.setState({male: male});
+            }
+            render() {
+                return (
+                    <div>
+                        <input type="text" defaultValue="123"/>
+                        <input type="text" value={this.state.value} onChange={(event)=>this.handleChange(event)}/>
+                        <p>{this.state.value}</p>
+                        <div>
+                            <label>性别</label>
+                            <input type="radio" name="radioName" checked={this.state.male} onChange={(event)=>this.handleRadio(event)} value="man"/>男
+                            <input type="radio" name="radioName" checked={!this.state.male} onChange={(event)=>this.handleRadio(event)} value="woman"/>女
+                        </div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <TabList name="state 生命周期"/>,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>

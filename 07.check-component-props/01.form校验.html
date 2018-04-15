@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>form校验</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        class MyForm extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    email: "",
+                    email2: "",
+                    intro: "",
+                    city: "hz",
+                    male: true, //性别
+                    emailError: "",
+                    emailError2: "",
+                    introError: ""
+                };
+                //事件处理函数
+                // This binding is necessary to make `this` work in the callback
+                this.handleEmail = this.handleEmail.bind(this);
+                this.handleIntro = this.handleIntro.bind(this);
+                this.handleCity = this.handleCity.bind(this);
+                this.handleGender = this.handleGender.bind(this);
+                this.handleSubmit = this.handleSubmit.bind(this);
+            }
+
+            handleEmail(e) {
+                let value = e.target.value;
+                let error = '';
+                if (!(/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61})[a-zA-Z0-9]?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value))) {
+                    error = '请输入正确的Email';
+                }
+                this.setState({
+                    email: value,
+                    emailError: error
+                })
+            }
+            handleEmail2(e) {
+                let value = e.target.value;
+                let error = '';
+                if (!(/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61})[a-zA-Z0-9]?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value))) {
+                    error = '请输入正确的Email';
+                }
+                this.setState({
+                    email2: value,
+                    emailError2: error
+                })
+            }
+
+            handleIntro(e) {
+                let value = e.target.value;
+                let error = '';
+                if(value.length < 10) {
+                    error = '介绍不能少于十个字';
+                }
+                this.setState({
+                    intro: value,
+                    introError: error
+                });
+            }
+
+            handleCity(e) {
+                let value = e.target.value;
+                this.setState({
+                    city: value
+                });
+            }
+
+            handleGender(e) {
+                let male = e.target.value === 'man';
+                let male2 = e.target.value;
+                this.setState({
+                    male: male,
+                    male2: male2
+                })
+            }
+
+            handleSubmit(e) {
+                alert('Your favorite flavor is: ' + JSON.stringify(this.state));
+                //假设data里面的数据要传给服务端
+                let data ={
+                    email: this.state.email,
+                    intro: this.state.intro,
+                    city: this.state.city,
+                    male: this.state.male2
+                };
+                e.preventDefault();
+            }
+
+            render() {
+                return (
+                        <div>
+                            <p>
+                                <label htmlFor="email">email:</label>
+                                <input type="text" name="email" id="email" value={this.state.email} onChange={this.handleEmail}/>
+                                <span>{this.state.emailError}</span>
+                            </p>
+                            <p>
+                                <label htmlFor="email2">email2:</label>
+                                <input type="text" name="email2" id="email2" value={this.state.email2} onChange={(event)=>this.handleEmail2(event)}/>
+                                <span>{this.state.emailError2}</span>
+                            </p>
+                            <p>
+                                <label htmlFor="intro">intro:</label>
+                                <input type="text" name="intro" id="intro" value={this.state.intro}
+                                       onChange={this.handleIntro}/>
+                                <span>{this.state.introError}</span>
+                            </p>
+                            <p>
+                                <label htmlFor="city">所在城市:</label>
+                                <select name="city" id="city" value={this.state.city} onChange={this.handleCity}>
+                                    <option value="hz">杭州</option>
+                                    <option value="bj">北京</option>
+                                    <option value="sh">上海</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label>性别:</label>
+                                <input type="radio" name="gender" checked={this.state.male}
+                                       onChange={this.handleGender}/>男
+                                <input type="radio" name="gender" checked={!this.state.male}
+                                       onChange={this.handleGender}/>女
+                            </p>
+                            <input type="button" value="submit" onClick={this.handleSubmit}/>
+                        </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <MyForm />,
+            document.getElementById('example')
+        );
+    </script>
+
+</body>
+</html>

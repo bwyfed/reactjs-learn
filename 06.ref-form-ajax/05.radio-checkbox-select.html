@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form表单元素</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        class TabList extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    value: 'hello',
+                    male: true,
+                    select: 'red'
+                };
+            }
+            componentDidMount() {
+                //利用生命周期钩子，初始化状态male2，否则第一次点击submit按钮时，获取不到male2状态
+                if(this.state.male) {
+                    this.setState({male2: 'man'})
+                } else {
+                    this.setState({male2: 'woman'})
+                }
+            }
+            handleChange(e) {
+                this.setState({
+                    value: e.target.value
+                })
+            }
+            handleRadio(e) {
+                let male = e.target.value === 'man';
+                let male2 = e.target.value; //取得当前input的value
+                this.setState({
+                    male: male,
+                    males: male2
+                })
+            }
+            handleSelect(e) {
+                this.setState({select: e.target.value})
+            }
+            handleSubmit(e) {
+                alert(JSON.stringify(this.state))
+            }
+            render() {
+                return (
+                    <div>
+                        <input type="text" defaultValue="123"/>
+                        <input type="text" value={this.state.value} onChange={(event)=>this.handleChange(event)}/>
+                        <p>{this.state.value}</p>
+                        <div>
+                            <label for="gender">性别</label>
+                            <input type="radio" id="gender" name="gender" checked={this.state.male} onChange={event=>this.handleRadio(event)} value="man"/>男
+                            <input type="radio" id="gender" name="gender" checked={!this.state.male} onChange={event=>this.handleRadio(event)} value="woman"/>女
+                        </div>
+                        <div>
+                            <input type="checkbox" name="checkboxName" defaultChecked/>123
+                        </div>
+                        <div>
+                            <select value={this.state.select} onChange={event=>this.handleSelect(event)}>
+                                <option value="red">red</option>
+                                <option value="green">green</option>
+                                <option value="blue">blue</option>
+                            </select>
+                        </div>
+                        <button onClick={event=>this.handleSubmit(event)}>submit</button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <TabList name="state 生命周期"/>,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form表单元素</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        class TabList extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    result: []
+                };
+            }
+            handleClick(e) {
+                var _this = this;
+                $.ajax({
+                    url: '/info',
+                    type: 'get',
+                    dataType: 'json',
+                    success:function(data){
+                        if(data.code==='200') {
+                            _this.setState({result: data.result})
+                        }
+                    },
+                    error: function() {
+
+                    }
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <button onClick={event=>this.handleClick(event)}>click</button>
+                        <ul>
+                            {
+                                this.state.result.map(function(item,index){
+                                    return <li key={index}>{item.name}</li>
+                                })
+                            }
+                        </ul>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <TabList name="state 生命周期"/>,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>

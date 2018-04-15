@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>props</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    class HelloMessage extends React.Component{
+        //内部定义默认属性
+        /*
+        static defaultProps = {
+            name: '12345'
+        };
+        */
+        render() {
+            return <h1>hello,{this.props.name}</h1>
+        }
+    }
+    const data = {
+        address:'wuhan',
+        obj: {
+            name: 'sonia'
+        }
+    };
+    //外部定义属性默认值
+    HelloMessage.defaultProps = {
+        name: 'abcabcd'
+    };
+    ReactDOM.render(
+        <HelloMessage />,
+        document.getElementById('example')
+    )
+</script>
+</body>
+</html>

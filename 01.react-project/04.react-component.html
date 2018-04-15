@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>component</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    //class方法基本定义
+    /*
+    class HelloMessage extends React.Component {
+        render() {
+            return <h1>hello, world</h1>
+        }
+    }
+    ReactDOM.render(
+        //<HelloMessage></HelloMessage>,
+        <HelloMessage/>,
+        document.getElementById('example')
+    );
+    */
+    //为组件添加属性
+    /*
+    class HelloMessage extends React.Component {
+        render() {
+            return <h1>hello, {this.props.name}</h1>
+        }
+    }
+    ReactDOM.render(
+            <HelloMessage name="lili"/>,
+        document.getElementById('example')
+    );
+    */
+    //属性是一个对象
+    /*
+    class HelloMessage extends React.Component {
+        render() {
+            return <h1>hello, {this.props.name}</h1>
+        }
+    }
+    const data = {
+        address: 'wuhan',
+        obj: {
+            name: 'sonia'
+        }
+    };
+    ReactDOM.render(
+        <HelloMessage name={data.address}/>,
+        document.getElementById('example')
+    );
+    */
+    //自定义组件，首字母一定要大写
+    /*
+    function Welcome() {
+        return <h1>hello,world</h1>;
+    }
+    const element = <Welcome/>;
+    class HelloMessage extends React.Component {
+        render() {
+            return <h1>hello, {this.props.abc}</h1>
+        }
+    }
+    const data = {
+        address: 'wuhan',
+        obj: {
+            name: 'sonia'
+        }
+    };
+    ReactDOM.render(
+        <div>
+            element,
+            <HelloMessage abc={data.address}/>
+        </div>,
+        document.getElementById('example')
+    )
+    */
+    //自定义组件传参，需要显式传递props(属性对象)，形参名字可以自定义
+    function Welcome(props) {
+        return <h1>hello,{props.name},{props.age}</h1>;
+    }
+    ReactDOM.render(
+        <Welcome name="mile" age="22"/>,
+        document.getElementById('example')
+    )
+</script>
+</body>
+</html>

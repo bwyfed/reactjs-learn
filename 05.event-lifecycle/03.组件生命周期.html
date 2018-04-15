@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件生命周期</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        function Num1(props) {
+            return <p>{props.myNum}</p>
+        }
+        class Hello extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    data: 1.0
+                }
+            }
+            setNum() {
+                this.setState({
+                    data: this.state.data+1
+                })
+            }
+            componentDidMount() {
+
+            }
+
+            componentWillUnmount() {
+                clearInterval(this.timer);
+            }
+
+            render() {
+                return (
+                    <div>
+                        <button onClick={(event)=>this.setNum(event)}>Add</button>
+                        <Num myNum={this.state.data} />
+                    </div>
+                )
+            }
+        }
+        class Num extends React.Component{
+            componentWillMount() {
+                console.log('组件将要挂载');
+            }
+            componentDidMount() {
+                console.log('组件完成挂载');
+            }
+            componentWillUpdate() {
+                console.log('组件将要更新');
+            }
+            componentWillUnmount() {
+                console.log('从DOM中移除组件')
+            }
+            render() {
+                return (
+                    <div>
+                        <p>{this.props.myNum}</p>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Hello name="state 生命周期"/>,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>

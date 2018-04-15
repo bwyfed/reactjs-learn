@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件传参（父-孙）</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        //父组件
+        class ParentList extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    color: 'red'
+                };
+            }
+            render() {
+                return (
+                    <div>
+                        {
+                           this.props.message.map((item,index)=>{
+                               return <ChildList key={index} text={item.text} color={this.state.color}/>
+                           })
+                        }
+                    </div>
+                )
+            }
+        }
+        //子组件
+        class ChildList extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <div>{this.props.text}-{this.props.color}</div>
+                        <GrandsonList color={this.props.color} text={this.props.text}/>
+                    </div>
+                )
+            }
+        }
+        //孙组件
+        class GrandsonList extends React.Component {
+            render() {
+                return (
+                    <div>
+                        <button style={{color:this.props.color}}>{this.props.text}</button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <ParentList message={[{text:'aaa',id:1},{text:'bbb',id:2},{text:'ccc',id:3}]}/>,
+            document.getElementById('example')
+        );
+    </script>
+
+</body>
+</html>

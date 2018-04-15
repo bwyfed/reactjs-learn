@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tab切换</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+    <style>
+        ul,li {
+            padding: 0;
+            margin: 0;
+        }
+        #tab {
+            width: 500px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+        }
+        .tab-title {
+            list-style: none;
+            overflow: hidden;
+        }
+        .tab-title li{
+            float: left;
+            padding: 20px 0;
+            /*width: 25%;*/
+            cursor: pointer;
+            background-color: #f4f4f4;
+            text-align:center;
+        }
+        .tab-title .cur {
+            background-color: #f60;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+    function OneList() {
+        return <p>列表1111</p>
+    }
+    function TwoList() {
+        return <p>列表2222</p>
+    }
+    function ListInfo(props) {
+        //使用三目运算
+        return (props.type ? <OneList/>: <TwoList/>)
+    }
+    class TabList extends React.Component {
+        constructor() {
+            super();
+            this.state = {
+                tabs: [
+                    {tabName: '新闻', id: 1},
+                    {tabName: '导航', id: 2},
+                    {tabName: '实时', id: 3},
+                    {tabName: '推荐', id: 4},
+                    {tabName: '推荐2', id: 5}
+                ],
+                currentIndex: 1
+            };
+        }
+        tabChoiced(id) {
+            this.setState({
+                currentIndex: id
+            })
+        }
+
+        render() {
+            let _this = this;
+            let tabList = _this.state.tabs.map(function(item,index,arr){
+                console.log(arr);
+                return <li key={index} style={{width: 100/_this.state.tabs.length+'%'}} onClick={_this.tabChoiced.bind(_this,item.id)} className={item.id===_this.state.currentIndex?'cur':''}>{item.tabName}</li>
+            });
+            return (
+                <div id="tab">
+                    <ul className="tab-title">
+                        {
+                            tabList
+                        }
+                    </ul>
+                    <div className="tab-con">
+                        {
+                            this.state.tabs.map(function(item,index){
+                                return (item.id===_this.state.currentIndex ? <p key={index}>{item.tabName}</p>:'')
+                            })
+                        }
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(
+        <TabList />,
+        document.getElementById('example')
+    )
+</script>
+</body>
+</html>

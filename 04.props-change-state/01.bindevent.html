@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件绑定</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        class Hello extends React.Component {
+            constructor() {
+                super();
+                this.state = {
+                    flag: true
+                };
+                this.isClick = this.bindClick.bind(this);
+            }
+            bindClick() {
+                this.setState({
+                    flag : !this.state.flag
+                })
+            }
+            bindClick1() {
+                this.setState({
+                    flag : !this.state.flag
+                })
+            }
+            bindClick2() {
+                this.setState({
+                    flag : !this.state.flag
+                })
+            }
+
+            render() {
+                return (
+                    <button
+                        onMouseMove={()=>this.bindClick1()}
+                        onMouseOut ={()=>this.bindClick2()}
+                        onClick={() => this.bindClick()}>
+                        {this.state.flag ? '打开': '关闭'}
+                    </button>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <Hello name="state 生命周期"/>,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>

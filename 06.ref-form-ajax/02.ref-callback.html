@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>refs-callback</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        function MyButton(props) {
+            return <button ref={(dom)=>{props.scope.changeStyle2=dom}}>button</button>
+        }
+        class TabList extends React.Component {
+            componentDidMount() {
+                this.changeStyle.style.color = 'red';
+                this.changeStyle.innerText = 'aaaa';
+                this.changeStyle2.innerText = 'qqqq';
+            }
+            handleClick() {
+                this.myText.focus();
+            }
+            render() {
+                return (
+                    <div>
+                        <input type="text" ref={(dom)=>{this.myText = dom}} />
+                        <button onClick={()=>this.handleClick()}>click</button>
+                        <button ref={(dom)=>{this.changeStyle = dom}}>button</button>
+                        <MyButton scope={this}/>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <TabList name="state 生命周期"/>,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>

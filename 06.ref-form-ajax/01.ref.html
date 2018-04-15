@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>refs</title>
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="node_modules/babel-standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="example"></div>
+    <script type="text/babel">
+        class TabList extends React.Component {
+            handleClick() {
+                this.refs.myText.focus();
+            }
+            render() {
+                return (
+                    <div>
+                        <input type="text" ref="myText" />
+                        <button onClick={()=>this.handleClick()}>click</button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <TabList name="state 生命周期"/>,
+            document.getElementById('example')
+        )
+    </script>
+</body>
+</html>
