@@ -36,13 +36,32 @@
                 )
             }
         }
-        //ChildA组件
+        //子组件
         class ChildList extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    checked: props.checked //状态来自父元素传过来的属性
+                };
+            }
+            change() {
+                let newState = !this.state.checked;
+                this.setState({
+                    checked: newState
+                });
+                this.props.callbackParent(newState);    //调用父组件传过来的回调方法
+            }
             render() {
                 return (
                     <div>
                         <div>{this.props.text}:
-                            <input type="checkbox" checked={} onChange={(event)=>this.props.callbackParent()}/>
+                            {/*<input type="checkbox"
+                                   checked={this.props.checked}
+                                   onChange={(event)=>this.props.callbackParent(false)}/>
+                            */}
+                            <input type="checkbox"
+                                   checked={this.state.checked}
+                                   onChange={(event)=>this.change(event)}/>
                         </div>
                     </div>
                 )
